@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  min-height: 100vh; /* 화면의 전체 높이만큼 컨테이너를 늘립니다. */
+  background-color: #f0f0f0;
+}
+
+.centeredContent {
+  text-align: center;
+}

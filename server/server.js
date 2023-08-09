@@ -27,6 +27,10 @@ io.on("connection",(socket)=>{
     socket.on("send_message(toServer)", (data)=>{
         socket.broadcast.emit("receive_message(toClient)", data)
     })
+
+    socket.on("disconnect", ()=>{
+        console.log(`User disconnected : ${socket.id}`);
+    })
 })
 
 module.exports = {
