@@ -20,6 +20,14 @@ function App() {
     return `${hours}:${minutes}:${seconds}`;
   }
 
+  const startChat = async () => {
+    await socket.emit("startChat", true);
+  }
+
+  const leaveChat = async () => {
+    await socket.emit("leaveChat", true);
+  }
+
   const sendMessage = async () => {
     // socket에 message 전송
     const sendData = {
@@ -33,17 +41,16 @@ function App() {
 
   useEffect(()=>{
     if(effectForRef.current === false) {
-
       const fetchSocket = () => {
          // socket의 message를 읽음
         socket.on("receive_message(toClient)", (data)=>{
+          console.log(data);
           setAllMessage((pre)=>[...pre, data]);
         })
       }
-
       fetchSocket();
-
     }
+
     return () => {
       effectForRef.current = true;
     }
@@ -66,6 +73,7 @@ function App() {
           Send Message
           </button>
         </div>
+        <button onClick={startChat}>Start Chat!</button>
         {
           allMessage.map((data, index)=>{
             return (
@@ -74,7 +82,8 @@ function App() {
               </div>
             )
           })
-        } 
+        }
+        <button onClick={leaveChat}>leave Chat!</button> 
       </div>
       {/* <input placeholder="Message..." onChange={(e)=>{
         setMessage(e.target.value);
